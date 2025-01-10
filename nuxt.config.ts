@@ -9,18 +9,25 @@ export default defineNuxtConfig({
     transpile: ['vuetify'],
   },
   modules: [
+    // vuetify
     (_options, nuxt) => {
       nuxt.hooks.hook('vite:extendConfig', (config) => {
         // @ts-expect-error
         config.plugins.push(vuetify({ autoImport: true }))
       })
     },
+    // dotenv
   ],
   vite: {
     vue: {
       template: {
         transformAssetUrls,
       },
+    },
+  },
+  runtimeConfig: {
+    public: {
+        apiUrl: process.env.API_URL || '',
     },
   },
 })
