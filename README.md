@@ -1,3 +1,15 @@
+# Environment Setup
+
+- [x] dotenv
+
+- [x] eslint + prettier
+
+- [x] storybook
+
+- [ ] unit test
+
+- [ ] ci -> git actions
+
 # Nuxt Minimal Starter
 
 Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
