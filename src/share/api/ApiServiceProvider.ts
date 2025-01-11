@@ -1,8 +1,8 @@
 import { defineStore } from "pinia";
-import type { FormApiServiceType } from "./ApiServiceInterfaces";
+import type { FormApiServiceType } from "./IApiService";
 import { FormApiService } from "./ApiService";
 
-export const useApiStore = defineStore("apiStore", () => {
+export const useApiProvider = defineStore("apiProvider", () => {
   const formApiService: FormApiServiceType = new FormApiService();
 
   return {
