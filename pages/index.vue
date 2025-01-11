@@ -1,9 +1,15 @@
-<script lang="ts">
+<script lang="ts" setup>
 const config = useRuntimeConfig();
 console.log(config.public.apiUrl);
 </script>
 
+
 <template>
+  <div>
+    <h1>Index.vue</h1>
+  </div>
+</template>
+<!-- <template>
   <div
     class="flex flex-col items-center justify-center min-h-screen bg-gray-100"
   >
@@ -16,4 +22,4 @@ console.log(config.public.apiUrl);
       </v-container>
     </v-app>
   </div>
-</template>
+</template> -->
