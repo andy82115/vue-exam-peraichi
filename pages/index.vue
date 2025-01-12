@@ -1,6 +1,6 @@
 <script lang="ts" setup>
-const config = useRuntimeConfig();
-console.log(config.public.apiUrl);
+  const config = useRuntimeConfig();
+  console.log(config.public.apiUrl);
 </script>
 
 <template>
