@@ -6,6 +6,8 @@ export const content = [
   "./plugins/**/*.{js,ts}",
 ];
 
+export const darkMode = "class";
+
 export const theme = {
   extend: {},
 };
