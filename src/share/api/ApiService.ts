@@ -1,4 +1,4 @@
-import type { FormApiServiceType } from "./ApiServiceInterfaces";
+import type { FormApiServiceType } from "./IApiService";
 import type { AxiosInstance } from "axios";
 import type { ApiResponse, FormSendResponse } from "./models/FormSendResponse";
 import type { FormSendParam } from "./models/FormSendParam";

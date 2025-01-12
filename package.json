@@ -29,6 +29,7 @@
     "@eslint/js": "^9.17.0",
     "@nuxt/types": "^2.18.1",
     "@nuxtjs/eslint-config-typescript": "^12.1.0",
+    "@nuxtjs/tailwindcss": "^6.12.2",
     "@storybook/addon-essentials": "^8.4.7",
     "@storybook/addon-interactions": "^8.4.7",
     "@storybook/addon-onboarding": "^8.4.7",
@@ -37,6 +38,7 @@
     "@storybook/test": "^8.4.7",
     "@storybook/vue3": "^8.4.7",
     "@storybook/vue3-vite": "^8.4.7",
+    "@types/node": "^22.10.5",
     "@vue/test-utils": "^2.4.6",
     "autoprefixer": "^10.4.20",
     "eslint": "^8.57.1",
@@ -51,6 +53,7 @@
     "prettier": "^3.4.2",
     "storybook": "^8.4.7",
     "tailwindcss": "^3.4.17",
+    "typescript": "^5.7.3",
     "typescript-eslint": "^8.19.1",
     "vite": "^6.0.7",
     "vitest": "^2.1.8"

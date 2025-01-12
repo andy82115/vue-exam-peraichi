@@ -1,14 +1,12 @@
 /** @type { import('@storybook/vue3').Preview } */
+import '../assets/css/tailwind.css';
 import { setup } from '@storybook/vue3';
 import { createVuetify } from 'vuetify';
 import * as components from 'vuetify/components';
 import * as directives from 'vuetify/directives';
 import '@mdi/font/css/materialdesignicons.css';
 // import { Preview } from "@storybook/vue3";
-
 import 'vuetify/styles';
-
-import '../assets/main.css';
 
 const vuetify = createVuetify({
   components,
@@ -21,7 +19,9 @@ setup((app) => {
 
 const preview = {
   parameters: {
-    actions: { argTypesRegex: "^on[A-Z].*" },
+    actions: {
+      handles: ['click', 'mouseover', 'focus'],
+    },
     controls: {
       matchers: {
         color: /(background|color)$/i,

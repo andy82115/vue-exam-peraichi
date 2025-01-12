@@ -9,3 +9,7 @@
 - [x] unit test
 
 - [x] ci -> git actions
+
+# Improve list
+
+- [ ] make date input get better
