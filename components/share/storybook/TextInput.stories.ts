@@ -2,12 +2,12 @@ import type { Meta, StoryObj } from '@storybook/vue3';
 import TextInput from '../TextInput.vue';
 
 const meta: Meta<typeof TextInput> = {
-  title: 'Components/TextInput', // 組件在 Storybook 中的路徑
+  title: 'Components/TextInput',
   component: TextInput,
   argTypes: {
     modelValue: {
       description: 'The value of the text field (used with v-model)',
-      control: { type: 'text' }, // 控制類型
+      control: { type: 'text' },
     },
     label: {
       description: 'The label text displayed above the text field',

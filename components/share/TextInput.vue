@@ -27,8 +27,8 @@
     },
   });
 
-  const inputValue = ref('');
   const emit = defineEmits(['update:modelValue']);
+  const inputValue = ref(props.modelValue);
 
   watch(
     () => inputValue,
