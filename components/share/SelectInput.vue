@@ -1,12 +1,10 @@
 <template>
-  <v-container>
-    <v-select
-      v-model="selectedValue"
-      :items="options"
-      :label="label"
-      variant="outlined"
-    />
-  </v-container>
+  <v-select
+    v-model="selectedValue"
+    :items="options"
+    :label="label"
+    variant="outlined"
+  />
 </template>
 
 <script setup lang="ts">

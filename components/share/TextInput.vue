@@ -1,16 +1,14 @@
 <template>
-  <v-container>
-    <v-text-field
-      v-model="inputValue"
-      :label="label"
-      :rules="rules"
-      variant="outlined"
-    />
-  </v-container>
+  <v-text-field
+    v-model="inputValue"
+    :label="label"
+    :rules="rules"
+    variant="outlined"
+  />
 </template>
 
-<script setup lang="ts">  
-  type ValidationRule = (value: string) => boolean | string;
+<script setup lang="ts">
+  import type { ValidationRule } from './types/ValidationType';
 
   const props = defineProps({
     modelValue: {
@@ -36,5 +34,4 @@
       emit('update:modelValue', newValue);
     }
   );
-
 </script>

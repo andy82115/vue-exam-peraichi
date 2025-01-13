@@ -1,27 +1,24 @@
-<script setup lang="ts">
-  import TextInput from '../components/share/TextInput.vue';
-  import SelectInput from '../components/share/SelectInput.vue';
-  import DateInput from '../components/share/DateInput.vue';
-  import TextAreaInput from '../components/share/TextAreaInput.vue';
-
-  const config = useRuntimeConfig();
-  const inputValue = ref('');
-  const dateInputValue = ref('');
-  const textAreaInputValue = ref('');
-  const selected = ref()
-
-  console.log(config.public.apiUrl);
-</script>
-
 <template>
-  <v-col>
-    <h1 class="text-4xl font-bold text-blue-500">
-      Hello Nuxt + Vuetify + TailwindCSS!
-    </h1>
-    <v-btn color="primary">Vuetify Button</v-btn>
-    <TextInput v-model="inputValue" label="Enter your name" />
-    <SelectInput v-model="selected" label="hellow" :options="['a','b','c','d','e']" />
-    <DateInput v-model="dateInputValue" label="input date"></DateInput>
-    <TextAreaInput v-model="textAreaInputValue" placeholder="input something"></TextAreaInput>
-  </v-col>
+  <div class="w-full h-full px-15 pb-48 md:px-5 bg-[#F6F2EA]">
+    <div class="text-4xl font-bold py-5 text-stone-700">
+      お問い合わせフォーム
+    </div>
+    <div class="w-full h-fit p-5 flex flex-col md:p-20 bg-white">
+      <FormNecessary />
+      <FormOptional />
+      <FormPolicy />
+    </div>
+  </div>
 </template>
+
+<script setup lang="ts">
+  import FormNecessary from '../components/form/FormNecessary.vue';
+  import FormOptional from '../components/form/FormOptional.vue';
+  import FormPolicy from '../components/form/FormPolicy.vue';
+  import { useFormPresenterStore } from '../src/app/presenter/FormPresenter';
+
+  const presenter = useFormPresenterStore();
+  const { newFormSendData } = presenter;
+
+  newFormSendData();
+</script>

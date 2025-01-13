@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full h-fit flex flex-col justify-center items-center">
+  <div class="w-full h-fit flex flex-row items-center">
     <label class="text-sm font-extrabold text-gray-500 md:mr-2">
       {{ labelText }}
     </label>
