@@ -6,7 +6,10 @@
       label-text="希望返信日"
       :label-required="formSendData.expectFeedback.isRequired"
     >
-      <DateInput v-model="expectFeedbackValue" label="年/月/日"></DateInput>
+      <DateInput
+        v-model="formSendData.expectFeedback.value as string"
+        label="年/月/日"
+      ></DateInput>
     </CombineInput>
     <!-- 希望返信日 end-->
     <FormSpacerSm />
@@ -17,19 +20,19 @@
       :label-required="formSendData.describe.isRequired"
     >
       <TextAreaInput
-        v-model="describeValue"
+        v-model="formSendData.describe.value as string"
         placeholder="入力してください"
       ></TextAreaInput>
     </CombineInput>
-     <!-- 詳細内容 end-->
-     <FormSpacerSm />
-     <!-- 画像　-->
+    <!-- 詳細内容 end-->
+    <FormSpacerSm />
+    <!-- 画像　-->
     <CombineInput
       className="w-fit h-fit"
       label-text="画像"
       :label-required="formSendData.images.isRequired"
     >
-      <FormImageUpload ></FormImageUpload>
+      <FormImageUpload></FormImageUpload>
     </CombineInput>
   </div>
 </template>
@@ -43,18 +46,4 @@
 
   const presenter = useFormPresenterStore();
   const { formSendData } = presenter;
-
-  const expectFeedbackValue = computed({
-    get: () => formSendData.expectFeedback.value as string,
-    set: (value: string) => {
-      formSendData.expectFeedback.value = value;
-    },
-  });
-
-  const describeValue = computed({
-    get: () => formSendData.describe.value as string,
-    set: (value: string) => {
-      formSendData.describe.value = value;
-    },
-  });
 </script>

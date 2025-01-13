@@ -12,7 +12,7 @@
     </label>
     <label
       v-else
-      class="text-sm font-bold text-black md:mr-2 bg-gray-400 rounded-lg px-3 py-1 p-3 m-2"
+      class="text-sm font-bold text-black md:mr-2 bg-gray-400 rounded-lg px-3 py-1 m-2"
     >
       任意
     </label>

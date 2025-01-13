@@ -38,4 +38,5 @@ type ApiResponse = z.infer<typeof ApiResponseSchema>;
 
 type FormSendResponse = z.infer<typeof FormSendResponseSchema>;
 
+export {ApiResponseSchema};
 export type { ApiResponse, FormSendResponse };

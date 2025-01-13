@@ -29,7 +29,7 @@
   const inputValue = ref(props.modelValue);
 
   watch(
-    () => inputValue,
+    () => inputValue.value,
     (newValue) => {
       emit('update:modelValue', newValue);
     }

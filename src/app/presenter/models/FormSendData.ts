@@ -1,5 +1,8 @@
-import { z } from "zod";
-import { FormSendParamSchema, type FormSendParam } from "../../../share/api/models/FormSendParam";
+import { z } from 'zod';
+import {
+  FormSendParamSchema,
+  type FormSendParam,
+} from '../../../share/api/models/FormSendParam';
 
 // FormPresenterのために特化する型定義
 const FormSendDataSchema = z.object(
@@ -17,16 +20,15 @@ const FormSendDataSchema = z.object(
 type FormSendData = z.infer<typeof FormSendDataSchema>;
 
 const formSendDataToParam = (sendData: FormSendData): FormSendParam => {
-    const parsedData = FormSendDataSchema.parse(sendData);
-
   const result: Record<string, any> = {};
-  for (const key in parsedData) {
-    result[key] = parsedData[key].value;
+
+  for (const key in sendData) {
+    result[key] = sendData[key].value;
   }
 
-  return FormSendParamSchema.parse(result);
-}
+  return result as FormSendParam;
+};
 
-export { formSendDataToParam }
+export { formSendDataToParam };
 
 export type { FormSendData };
