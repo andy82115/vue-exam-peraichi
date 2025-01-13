@@ -9,7 +9,7 @@
       <DateInput v-model="expectFeedbackValue" label="年/月/日"></DateInput>
     </CombineInput>
     <!-- 希望返信日 end-->
-    <div class="w-3 h-2 md:w-10 md:h-5" />
+    <FormSpacerSm />
     <!-- 詳細内容　-->
     <CombineInput
       className="w-full h-fit"
@@ -21,6 +21,16 @@
         placeholder="入力してください"
       ></TextAreaInput>
     </CombineInput>
+     <!-- 詳細内容 end-->
+     <FormSpacerSm />
+     <!-- 画像　-->
+    <CombineInput
+      className="w-fit h-fit"
+      label-text="画像"
+      :label-required="formSendData.images.isRequired"
+    >
+      <FormImageUpload ></FormImageUpload>
+    </CombineInput>
   </div>
 </template>
 
@@ -28,6 +38,7 @@
   import DateInput from '../share/DateInput.vue';
   import TextAreaInput from '../share/TextAreaInput.vue';
   import CombineInput from '../form/CombineInput.vue';
+  import FormImageUpload from './FormImageUpload.vue';
   import { useFormPresenterStore } from '../../src/app/presenter/FormPresenter';
 
   const presenter = useFormPresenterStore();

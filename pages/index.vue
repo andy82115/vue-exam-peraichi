@@ -6,6 +6,7 @@
     <div class="w-full h-fit p-5 flex flex-col md:p-20 bg-white">
       <FormNecessary />
       <FormOptional />
+      <FormSpacerSm />
       <FormPolicy />
     </div>
   </div>
@@ -15,6 +16,7 @@
   import FormNecessary from '../components/form/FormNecessary.vue';
   import FormOptional from '../components/form/FormOptional.vue';
   import FormPolicy from '../components/form/FormPolicy.vue';
+  import FormSpacerSm from '../components/form/FormSpacerSm.vue';
   import { useFormPresenterStore } from '../src/app/presenter/FormPresenter';
 
   const presenter = useFormPresenterStore();

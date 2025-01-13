@@ -33,6 +33,7 @@ export const useFormPresenterStore = defineStore('formPresenter', () => {
   const repositoryStore = useFormRepositoryProvider();
   const formSendData = ref<FormSendData>(createDefaultFormSendData());
 
+  // Actions
   const newFormSendData = () => {
     formSendData.value = createDefaultFormSendData();
   };
@@ -48,6 +49,17 @@ export const useFormPresenterStore = defineStore('formPresenter', () => {
       isSendFormLoading.value = false;
     }
   };
+
+  const addImagePath = (path: string) => {
+    const oldValue = formSendData.value.images.value as string[]
+    formSendData.value.images.value = [...oldValue, path]
+  }
+
+  const removeImagePath = (index: number) => {
+    const oldValue = formSendData.value.images.value as string[]
+    oldValue.splice(index, 1);
+    formSendData.value.images.value = [...oldValue]
+  }
 
   //Rules
   const inputRequiredRule: ValidationRule = (value: string) => {
@@ -72,5 +84,7 @@ export const useFormPresenterStore = defineStore('formPresenter', () => {
     // actions
     newFormSendData,
     sendForm,
+    addImagePath,
+    removeImagePath,
   };
 });

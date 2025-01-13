@@ -14,7 +14,7 @@
           ></TextInput>
         </CombineInput>
   
-        <div class="w-3 h-2 md:w-10 md:h-5" />
+        <FormSpacerSm />
   
         <CombineInput
           className="w-full h-fit"
@@ -29,7 +29,7 @@
         </CombineInput>
       </div>
       <!-- 名前の入力 end -->
-      <div class="w-3 h-2 md:w-10 md:h-5" />
+      <FormSpacerSm />
       <!-- メールアドレスの入力 -->
       <CombineInput
         className="w-full h-fit"
@@ -43,7 +43,7 @@
         ></TextInput>
       </CombineInput>
       <!-- メールアドレスの入力 end-->
-      <div class="w-3 h-2 md:w-10 md:h-5" />
+      <FormSpacerSm />
       <!-- 質問の選択-->
       <CombineInput
         className="w-fit h-fit"
@@ -62,6 +62,7 @@
     import TextInput from '../share/TextInput.vue';
     import SelectInput from '../share/SelectInput.vue';
     import CombineInput from '../form/CombineInput.vue';
+    import FormSpacerSm from './FormSpacerSm.vue';
     import { useFormPresenterStore } from '../../src/app/presenter/FormPresenter';
     
     const presenter = useFormPresenterStore();

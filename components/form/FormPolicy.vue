@@ -1,21 +1,21 @@
 <template>
-  <div class="w-full h-fit flex flex-col">
-    <div class="w-fit h-fit">bla bla bla</div>
-    <label class="w-fit h-fit">
+  <div class="w-full h-fit font-bold flex flex-col">
+    <div class="w-fit h-fit">個人情報の取扱について</div>
+    <label class="w-fit h-fit font-normal">
       <a
         class="text-blue-500 hover:underline"
         href="https://en.wikipedia.org/wiki/Private_law"
         target="_blank"
         rel="noopener noreferrer"
       >
-        click here
+        こちら
       </a>
-      asdfsdffdff
+      をご確認の上、同意をお願いいたします。
     </label>
-    <div class="w-fit h-fit flex flex-row items-center">
+    <div class="w-fit h-fit font-normal flex flex-row items-center">
       <label for="private-checkbox">
         <input type="checkbox" id="private-checkbox" v-model="isPrivatePermissionValue" />
-        I agree to the terms and conditions
+        個人情報の取扱について同意する
       </label>
     </div>
   </div>
