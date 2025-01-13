@@ -19,6 +19,7 @@ const questionList = [
 const SendFormStates = {
   INIT: 'init',
   INVALID: 'invalid',
+  VALID: 'valid',
   LOADING: 'loading',
   SUCCESS: 'success',
   FAIL: 'fail',
@@ -55,28 +56,38 @@ export const useFormPresenterStore = defineStore('formPresenter', () => {
     sendFormState.value = SendFormStates.INIT;
   }
 
+  const checkForm = async () => {
+    sendFormState.value = SendFormStates.LOADING;
+    const params = formSendDataToParam(formSendData.value);
+
+    if (!checkDataValid(params)) {
+      sendFormState.value = sendFormStates.INVALID;
+    }
+    else {
+      sendFormState.value = sendFormStates.VALID;
+    }
+  }
+
   const sendForm = async () => {
     sendFormState.value = SendFormStates.LOADING;
     const params = formSendDataToParam(formSendData.value);
 
+    if (!checkDataValid(params)) {
+      return;
+    }
+
     // Data Create
     params.fullName = `${params.lastName || ''}${params.firstName || ''}`;
     params.createdAt = new Date().toISOString();
-    params.id = 'ajaja'
-
-    if (!checkDataValid(params)) {
-      sendFormState.value = sendFormStates.INVALID;
-      return;
-    }
+    params.id = params.fullName + params.createdAt
 
     try {
       const response = await repositoryStore.formRepository.formSend(params);
       console.log('responsee value -> ' , response)
+      sendFormState.value = sendFormStates.SUCCESS;
       return response;
     } catch (error) {
       sendFormState.value = sendFormStates.FAIL;
-    } finally {
-      sendFormState.value = sendFormStates.SUCCESS;
     }
   };
 
@@ -181,6 +192,7 @@ export const useFormPresenterStore = defineStore('formPresenter', () => {
     // actions
     newFormSendData,
     sendForm,
+    checkForm,
     initSendFormState,
     addImagePath,
     removeImagePath,
