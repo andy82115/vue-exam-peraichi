@@ -1,48 +1,200 @@
 // stores/formPresenterStore.ts
-import { defineStore } from "pinia";
-import { ref } from "vue";
-import { useFormRepositoryProvider } from "../data/repository/FormRepositoryProvider";
-import type { FormSendData } from "./models/FormSendData";
+import { defineStore } from 'pinia';
+import { ref } from 'vue';
+import { useFormRepositoryProvider } from '../data/repository/FormRepositoryProvider';
+import { formSendDataToParam, type FormSendData } from './models/FormSendData';
+import type { ValidationRule } from '../../../components/share/types/ValidationType';
+import type { FormSendParam } from '../../../src/share/api/models/FormSendParam';
 
-export const useFormPresenterStore = defineStore("formPresenter", () => {
-  const isSendFormLoading = ref(false);
-  const formSendData = ref<FormSendData>();
+// fake data
+const questionList = [
+  '商品について',
+  '運送について',
+  '支払いについて',
+  'カスタマーサービスについて',
+  '全体的な満足度',
+];
+
+// api send state
+const SendFormStates = {
+  INIT: 'init',
+  INVALID: 'invalid',
+  VALID: 'valid',
+  LOADING: 'loading',
+  SUCCESS: 'success',
+  FAIL: 'fail',
+};
+
+type SendFormState = typeof SendFormStates[keyof typeof SendFormStates];
+
+const createDefaultFormSendData = (): FormSendData => ({
+  createdAt: { value: undefined, isRequired: true },
+  fullName: { value: '', isRequired: true },
+  firstName: { value: '', isRequired: true },
+  lastName: { value: '', isRequired: true },
+  email: { value: '', isRequired: true },
+  question: { value: questionList[0], isRequired: true },
+  expectFeedback: { value: undefined, isRequired: false },
+  describe: { value: '', isRequired: false },
+  images: { value: [], isRequired: false },
+  isPrivatePermission: { value: false, isRequired: true },
+  id: { value: undefined, isRequired: true },
+});
+
+export const useFormPresenterStore = defineStore('formPresenter', () => {
+  const sendFormState = ref<SendFormState>(SendFormStates.INIT);
+  const invalidErrors = ref<string[]>([]);
   const repositoryStore = useFormRepositoryProvider();
+  const formSendData = ref<FormSendData>(createDefaultFormSendData());
 
+  // Actions
   const newFormSendData = () => {
-    formSendData.value = {
-      createdAt: { value: undefined, isRequired: true },
-      fullName: { value: "", isRequired: true },
-      firstName: { value: "", isRequired: true },
-      lastName: { value: "", isRequired: true },
-      email: { value: undefined, isRequired: true },
-      question: { value: "", isRequired: false },
-      expectFeedback: { value: undefined, isRequired: false },
-      describe: { value: "", isRequired: false },
-      images: { value: [], isRequired: false },
-      isPrivatePermission: { value: false, isRequired: true },
-      id: { value: undefined, isRequired: true },
-    };
+    formSendData.value = createDefaultFormSendData();
   };
 
-  const sendForm = async (params: any) => {
-    isSendFormLoading.value = true;
+  const initSendFormState = () => {
+    sendFormState.value = SendFormStates.INIT;
+  }
+
+  const checkForm = async () => {
+    sendFormState.value = SendFormStates.LOADING;
+    const params = formSendDataToParam(formSendData.value);
+
+    if (!checkDataValid(params)) {
+      sendFormState.value = sendFormStates.INVALID;
+    }
+    else {
+      sendFormState.value = sendFormStates.VALID;
+    }
+  }
+
+  const sendForm = async () => {
+    sendFormState.value = SendFormStates.LOADING;
+    const params = formSendDataToParam(formSendData.value);
+
+    if (!checkDataValid(params)) {
+      return;
+    }
+
+    // Data Create
+    params.fullName = `${params.lastName || ''}${params.firstName || ''}`;
+    params.createdAt = new Date().toISOString();
+    params.id = params.fullName + params.createdAt
+
     try {
       const response = await repositoryStore.formRepository.formSend(params);
+      console.log('responsee value -> ' , response)
+      sendFormState.value = sendFormStates.SUCCESS;
       return response;
     } catch (error) {
-      throw error;
-    } finally {
-      isSendFormLoading.value = false;
+      sendFormState.value = sendFormStates.FAIL;
     }
   };
 
+  const checkDataValid = (params: FormSendParam): boolean => {
+    const errors: string[] = [];
+
+    if (!inputRequirdCheck(params.firstName ?? '')) {
+      errors.push('First name cannot be empty.');
+    }
+    if (!inputRequirdCheck(params.lastName ?? '')) {
+      errors.push('Last name cannot be empty.');
+    }
+    if (!inputRequirdCheck(params.email ?? '')) {
+      errors.push('Email cannot be empty.');
+    } else {
+      if (!emailValidCheck(params.email ?? '')) {
+        errors.push('Please enter a valid email address.');
+      }
+    }
+    if (!params.isPrivatePermission) {
+      errors.push('Please Check Permission');
+    }
+
+    if (params.expectFeedback) {
+      const [year, month, day] = params.expectFeedback.split('/').map(Number);
+
+      if (
+        !year ||
+        !month ||
+        !day ||
+        month < 1 ||
+        month > 12 ||
+        day < 1 ||
+        day > 31
+      ) {
+        errors.push('Expected feedback is not a valid date.');
+      } else {
+        const parsedDate = new Date(year, month - 1, day);
+
+        if (isNaN(parsedDate.getTime())) {
+          errors.push('Expected feedback is not a valid date.');
+        } else {
+          params.expectFeedback = parsedDate.toISOString();
+        }
+      }
+    }
+
+    if (errors.length > 0) {
+      console.error('Validation Errors:', errors);
+      invalidErrors.value = errors;
+      return false;
+    } else {
+      invalidErrors.value = [];
+      return true;
+    }
+  };
+
+  const addImagePath = (path: string) => {
+    const oldValue = formSendData.value.images.value as string[];
+    formSendData.value.images.value = [...oldValue, path];
+  };
+
+  const removeImagePath = (index: number) => {
+    const oldValue = formSendData.value.images.value as string[];
+    oldValue.splice(index, 1);
+    formSendData.value.images.value = [...oldValue];
+  };
+
+  //Rules
+  const inputRequirdCheck = (value: string): boolean => {
+    return value.trim().length > 0;
+  };
+
+  const inputRequiredRule: ValidationRule = (value: string) => {
+    return inputRequirdCheck(value) || 'This field cannot be empty.';
+  };
+
+  const emailValidCheck = (value: string): boolean => {
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    return emailRegex.test(value);
+  };
+
+  const emailRule: ValidationRule = (value: string) => {
+    return emailValidCheck(value) || 'Please enter a valid email address.';
+  };
+
+  //Fake Datas
+  const askForQuestionList = questionList;
+
+  //State types
+  const sendFormStates = SendFormStates;
+
   return {
     // states
-    isSendFormLoading,
+    sendFormState,
     formSendData,
+    inputRequiredRule,
+    invalidErrors,
+    emailRule,
+    askForQuestionList,
+    SendFormStates,
     // actions
     newFormSendData,
     sendForm,
+    checkForm,
+    initSendFormState,
+    addImagePath,
+    removeImagePath,
   };
 });

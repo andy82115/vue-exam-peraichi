@@ -32,7 +32,16 @@ export default defineNuxtConfig({
   },
   runtimeConfig: {
     public: {
-      apiUrl: process.env.API_URL || '',
+      apiUrl: process.env.VITE_API_URL || '',
     },
   },
+  nitro: {
+    devProxy: {
+      '/api': {
+        target: process.env.VITE_API_URL || 'http://httpbin.org',
+        changeOrigin: true,
+        prependPath: true
+      }
+    }
+  }
 });

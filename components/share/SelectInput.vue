@@ -1,12 +1,10 @@
 <template>
-  <v-container>
-    <v-select
-      v-model="selectedValue"
-      :items="options"
-      :label="label"
-      variant="outlined"
-    />
-  </v-container>
+  <v-select
+    v-model="selectedValue"
+    :items="options"
+    :label="label"
+    variant="outlined"
+  />
 </template>
 
 <script setup lang="ts">
@@ -35,7 +33,7 @@
   const selectedValue = ref(props.modelValue);
 
   watch(
-    () => selectedValue,
+    () => selectedValue.value,
     (newValue) => {
       emit('update:modelValue', newValue);
     }

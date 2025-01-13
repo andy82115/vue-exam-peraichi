@@ -1,14 +1,12 @@
 <template>
-  <v-container>
-    <v-text-field
-      v-model="formattedDate"
-      :label="label"
-      :rules="rules"
-      variant="outlined"
-      @input="formatDate"
-      maxlength="10"
-    />
-  </v-container>
+  <v-text-field
+    v-model="formattedDate"
+    :label="label"
+    :rules="rules"
+    variant="outlined"
+    @input="formatDate"
+    maxlength="10"
+  />
 </template>
 
 <script setup lang="ts">
