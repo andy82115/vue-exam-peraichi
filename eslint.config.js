@@ -26,4 +26,12 @@ export default [
       useRuntimeConfig: "readonly",
     },
   },
+  {
+    files: ["**/*.stories.{js,ts,vue}"],
+    rules: {
+      "no-unused-vars": "off",
+      "no-console": "off",
+      "vue/no-unused-components": "off",
+    },
+  },
 ];

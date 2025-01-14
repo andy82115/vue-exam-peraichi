@@ -1,87 +1,64 @@
-# Environment Setup
 
-- [x] dotenv
+# インストール方法
 
-- [x] eslint + prettier
-
-- [x] storybook
-
-- [ ] unit test
-
-- [ ] ci -> git actions
-
-# Nuxt Minimal Starter
-
-Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
-
-## Setup
-
-Make sure to install dependencies:
-
-```bash
-# npm
-npm install
-
-# pnpm
-pnpm install
-
-# yarn
-yarn install
-
-# bun
-bun install
+1. ".envsample"を.envに変更
+2. npm install
 ```
-
-## Development Server
-
-Start the development server on `http://localhost:3000`:
-
-```bash
-# npm
+ npm i
+```
+3. 開発版実行 (任意)
+```
 npm run dev
-
-# pnpm
-pnpm dev
-
-# yarn
-yarn dev
-
-# bun
-bun run dev
+```
+4. 単体テスト (任意)
+```
+npm run unit-test
+```
+5. Storybook	(任意)
+```
+npm run storybook
 ```
 
-## Production
+# 環境
 
-Build the application for production:
+ - node : v22.8.0
+ - npm : 10.8.2
+ - nuxt
 
-```bash
-# npm
-npm run build
+# ファイル構成&説明
 
-# pnpm
-pnpm build
+ - components //UI
+	- share //共有のcomponents
+	- form //pages対応のcomponents
+- src //ビジネスロジック
+	- app //pages対応
+	- share //共有のservice
+- test //単体テスト
 
-# yarn
-yarn build
+# アーキテクチャー
+![vue arch](./docs/vueflow.jpg)
 
-# bun
-bun run build
-```
+# 開発について
 
-Locally preview production build:
+ - クリーンアーキテクチャー
+ - DI: pinia
+ - 状態管理: pinia
+ - 単体テスト(Mock): vitest
+ - UI: vuetify + tailwindcss
+ - API: axios
+ - 環境管理:dotenv
+ - データ検証:zod
+ - lint: Eslint
 
-```bash
-# npm
-npm run preview
+# 環境設定
+- [x] dotenv
+- [x] eslint + prettier
+- [x] storybook
+- [x] unit test
+- [x] - [x] ci -> git actions
+# リストの改善
+- [ ] make date input get better
 
-# pnpm
-pnpm preview
+- [ ] presenter unit test
 
-# yarn
-yarn preview
-
-# bun
-bun run preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+- [ ] make component for storybook (storybook cannot handle v-model component) / search way to do it
