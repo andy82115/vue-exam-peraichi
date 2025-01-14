@@ -10,7 +10,8 @@
     "postinstall": "nuxt prepare",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "unit-test": "vitest"
+    "unit-test": "vitest",
+    "format": "prettier --write \"{src,components,pages}/**/*.{ts,vue}\""
   },
   "dependencies": {
     "@mdi/font": "^7.4.47",

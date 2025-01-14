@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/vue3';
 import TextareaInput from '../TextAreaInput.vue';
 
 const meta: Meta<typeof TextareaInput> = {
-  title: 'Components/TextareaInput', 
+  title: 'Components/TextareaInput',
   component: TextareaInput,
   argTypes: {
     modelValue: {
@@ -11,7 +11,7 @@ const meta: Meta<typeof TextareaInput> = {
     },
     placeholder: {
       description: 'The label text displayed above the textarea',
-      control: { type: 'text' }, 
+      control: { type: 'text' },
     },
     rules: {
       description: 'Validation rules for the textarea',

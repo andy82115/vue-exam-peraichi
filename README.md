@@ -38,6 +38,17 @@ npm run storybook
 # アーキテクチャー
 ![vue arch](./docs/vueflow.jpg)
 
+# 実装かかる時間
+1/11 (土)　
+環境設定: dotenv, eslint, vuetify, storybook, tailwindcss,...などなど
+1/12 (日)　
+API〜アーキテクチャーを実装します。
+API Service, クリーンアーキテクチャー (Data, Domain, Presenter)
+1/13 (月)
+UIを実装します。Presenterを調整します。
+1/14 (火)
+READMEを作ります。
+
 # 開発について
 
  - クリーンアーキテクチャー
@@ -55,10 +66,10 @@ npm run storybook
 - [x] eslint + prettier
 - [x] storybook
 - [x] unit test
-- [x] - [x] ci -> git actions
+- [x] ci -> git actions
 # リストの改善
 - [ ] make date input get better
 
-- [ ] presenter unit test
+- [x] presenter unit test
 
 - [ ] make component for storybook (storybook cannot handle v-model component) / search way to do it

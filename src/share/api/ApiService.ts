@@ -55,15 +55,15 @@ export class FormApiService implements FormApiServiceType {
         params,
         {
           headers: {
-            'Accept': 'application/json'
-          }
+            Accept: 'application/json',
+          },
         }
       );
 
       console.log('API Response:', {
         status: response.status,
         headers: response.headers,
-        data: response.data
+        data: response.data,
       });
 
       return response.data;

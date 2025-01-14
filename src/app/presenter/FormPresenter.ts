@@ -15,6 +15,15 @@ const questionList = [
   '全体的な満足度',
 ];
 
+const ErrorMessages = {
+  EMPTY_FIRST_NAME: '名を空にすることはできません。',
+  EMPTY_LAST_NAME: '姓を空にすることはできません',
+  EMPTY_EMAIL: 'メールを空にすることはできません。',
+  INVALID_EMAIL: '有効なメールアドレスを入力してください。',
+  CHECK_PERMISSION: '許可を確認してください',
+  INVALID_DATE: '希望返信日は有効な日付ではありません。',
+};
+
 // api send state
 const SendFormStates = {
   INIT: 'init',
@@ -25,7 +34,7 @@ const SendFormStates = {
   FAIL: 'fail',
 };
 
-type SendFormState = typeof SendFormStates[keyof typeof SendFormStates];
+type SendFormState = (typeof SendFormStates)[keyof typeof SendFormStates];
 
 const createDefaultFormSendData = (): FormSendData => ({
   createdAt: { value: undefined, isRequired: true },
@@ -54,7 +63,7 @@ export const useFormPresenterStore = defineStore('formPresenter', () => {
 
   const initSendFormState = () => {
     sendFormState.value = SendFormStates.INIT;
-  }
+  };
 
   const checkForm = async () => {
     sendFormState.value = SendFormStates.LOADING;
@@ -62,28 +71,28 @@ export const useFormPresenterStore = defineStore('formPresenter', () => {
 
     if (!checkDataValid(params)) {
       sendFormState.value = sendFormStates.INVALID;
-    }
-    else {
+    } else {
       sendFormState.value = sendFormStates.VALID;
     }
-  }
+  };
 
   const sendForm = async () => {
     sendFormState.value = SendFormStates.LOADING;
     const params = formSendDataToParam(formSendData.value);
 
     if (!checkDataValid(params)) {
+      sendFormState.value = sendFormStates.INVALID;
       return;
     }
 
     // Data Create
     params.fullName = `${params.lastName || ''}${params.firstName || ''}`;
     params.createdAt = new Date().toISOString();
-    params.id = params.fullName + params.createdAt
+    params.id = params.fullName + params.createdAt;
 
     try {
       const response = await repositoryStore.formRepository.formSend(params);
-      console.log('responsee value -> ' , response)
+      console.log('responsee value -> ', response);
       sendFormState.value = sendFormStates.SUCCESS;
       return response;
     } catch (error) {
@@ -95,20 +104,20 @@ export const useFormPresenterStore = defineStore('formPresenter', () => {
     const errors: string[] = [];
 
     if (!inputRequirdCheck(params.firstName ?? '')) {
-      errors.push('First name cannot be empty.');
+      errors.push(ErrorMessages.EMPTY_FIRST_NAME);
     }
     if (!inputRequirdCheck(params.lastName ?? '')) {
-      errors.push('Last name cannot be empty.');
+      errors.push(ErrorMessages.EMPTY_LAST_NAME);
     }
     if (!inputRequirdCheck(params.email ?? '')) {
-      errors.push('Email cannot be empty.');
+      errors.push(ErrorMessages.EMPTY_EMAIL);
     } else {
       if (!emailValidCheck(params.email ?? '')) {
-        errors.push('Please enter a valid email address.');
+        errors.push(ErrorMessages.INVALID_EMAIL);
       }
     }
     if (!params.isPrivatePermission) {
-      errors.push('Please Check Permission');
+      errors.push(ErrorMessages.CHECK_PERMISSION);
     }
 
     if (params.expectFeedback) {
@@ -123,12 +132,12 @@ export const useFormPresenterStore = defineStore('formPresenter', () => {
         day < 1 ||
         day > 31
       ) {
-        errors.push('Expected feedback is not a valid date.');
+        errors.push(ErrorMessages.INVALID_DATE);
       } else {
         const parsedDate = new Date(year, month - 1, day);
 
         if (isNaN(parsedDate.getTime())) {
-          errors.push('Expected feedback is not a valid date.');
+          errors.push(ErrorMessages.INVALID_DATE);
         } else {
           params.expectFeedback = parsedDate.toISOString();
         }
@@ -189,6 +198,7 @@ export const useFormPresenterStore = defineStore('formPresenter', () => {
     emailRule,
     askForQuestionList,
     SendFormStates,
+    ErrorMessages,
     // actions
     newFormSendData,
     sendForm,

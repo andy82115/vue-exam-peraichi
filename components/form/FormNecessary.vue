@@ -66,5 +66,6 @@
   import { useFormPresenterStore } from '../../src/app/presenter/FormPresenter';
 
   const presenter = useFormPresenterStore();
-  const { formSendData, inputRequiredRule, emailRule, askForQuestionList } = presenter;
+  const { formSendData, inputRequiredRule, emailRule, askForQuestionList } =
+    presenter;
 </script>

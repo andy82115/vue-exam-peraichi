@@ -14,7 +14,11 @@
     </label>
     <div class="w-fit h-fit font-normal flex flex-row items-center">
       <label for="private-checkbox">
-        <input type="checkbox" id="private-checkbox" v-model="isPrivatePermissionValue" />
+        <input
+          type="checkbox"
+          id="private-checkbox"
+          v-model="isPrivatePermissionValue"
+        />
         個人情報の取扱について同意する
       </label>
     </div>

@@ -33,8 +33,6 @@ export const Default: Story = {
   args: {
     modelValue: '',
     label: 'Choose a fruit',
-    options: [
-      "a","b","c","e","f",
-    ],
+    options: ['a', 'b', 'c', 'e', 'f'],
   },
 };
