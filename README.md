@@ -70,6 +70,6 @@ READMEを作ります。
 # リストの改善
 - [ ] make date input get better
 
-- [ ] presenter unit test
+- [x] presenter unit test
 
 - [ ] make component for storybook (storybook cannot handle v-model component) / search way to do it
