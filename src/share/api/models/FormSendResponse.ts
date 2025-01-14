@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z } from 'zod';
 
 const FormSendResponseSchema = z.object({
   createdAt: z.number().optional(),
@@ -18,17 +18,19 @@ const ApiResponseSchema = z.object({
   data: z.string().optional(),
   files: z.object({}).optional(),
   form: z.object({}).optional(),
-  headers: z.object({
-    Accept: z.string().optional(),
-    "Accept-Encoding": z.string().optional(),
-    "Cache-Control": z.string().optional(),
-    "Content-Length": z.string().optional(),
-    "Content-Type": z.string().optional(),
-    Host: z.string().optional(),
-    "Postman-Token": z.string().optional(),
-    "User-Agent": z.string().optional(),
-    "X-Amzn-Trace-Id": z.string().optional(),
-  }).optional(),
+  headers: z
+    .object({
+      Accept: z.string().optional(),
+      'Accept-Encoding': z.string().optional(),
+      'Cache-Control': z.string().optional(),
+      'Content-Length': z.string().optional(),
+      'Content-Type': z.string().optional(),
+      Host: z.string().optional(),
+      'Postman-Token': z.string().optional(),
+      'User-Agent': z.string().optional(),
+      'X-Amzn-Trace-Id': z.string().optional(),
+    })
+    .optional(),
   json: FormSendResponseSchema.optional(),
   origin: z.string().optional(),
   url: z.string().optional(),
@@ -38,5 +40,5 @@ type ApiResponse = z.infer<typeof ApiResponseSchema>;
 
 type FormSendResponse = z.infer<typeof FormSendResponseSchema>;
 
-export {ApiResponseSchema};
+export { ApiResponseSchema };
 export type { ApiResponse, FormSendResponse };

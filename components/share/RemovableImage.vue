@@ -1,5 +1,7 @@
 <template>
-  <div class="h-fit w-fit flex relative border-2 border-gray-300 overflow-visible">
+  <div
+    class="h-fit w-fit flex relative border-2 border-gray-300 overflow-visible"
+  >
     <img class="block m-4 w-full h-auto" :src="imgSrc" />
 
     <button

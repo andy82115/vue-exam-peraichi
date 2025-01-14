@@ -25,7 +25,7 @@ const SendFormStates = {
   FAIL: 'fail',
 };
 
-type SendFormState = typeof SendFormStates[keyof typeof SendFormStates];
+type SendFormState = (typeof SendFormStates)[keyof typeof SendFormStates];
 
 const createDefaultFormSendData = (): FormSendData => ({
   createdAt: { value: undefined, isRequired: true },
@@ -54,7 +54,7 @@ export const useFormPresenterStore = defineStore('formPresenter', () => {
 
   const initSendFormState = () => {
     sendFormState.value = SendFormStates.INIT;
-  }
+  };
 
   const checkForm = async () => {
     sendFormState.value = SendFormStates.LOADING;
@@ -62,11 +62,10 @@ export const useFormPresenterStore = defineStore('formPresenter', () => {
 
     if (!checkDataValid(params)) {
       sendFormState.value = sendFormStates.INVALID;
-    }
-    else {
+    } else {
       sendFormState.value = sendFormStates.VALID;
     }
-  }
+  };
 
   const sendForm = async () => {
     sendFormState.value = SendFormStates.LOADING;
@@ -79,11 +78,11 @@ export const useFormPresenterStore = defineStore('formPresenter', () => {
     // Data Create
     params.fullName = `${params.lastName || ''}${params.firstName || ''}`;
     params.createdAt = new Date().toISOString();
-    params.id = params.fullName + params.createdAt
+    params.id = params.fullName + params.createdAt;
 
     try {
       const response = await repositoryStore.formRepository.formSend(params);
-      console.log('responsee value -> ' , response)
+      console.log('responsee value -> ', response);
       sendFormState.value = sendFormStates.SUCCESS;
       return response;
     } catch (error) {

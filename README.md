@@ -55,7 +55,7 @@ npm run storybook
 - [x] eslint + prettier
 - [x] storybook
 - [x] unit test
-- [x] - [x] ci -> git actions
+- [x] ci -> git actions
 # リストの改善
 - [ ] make date input get better
 

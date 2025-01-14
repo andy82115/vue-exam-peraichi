@@ -44,6 +44,9 @@ export const WithValidationRules: Story = {
   args: {
     modelValue: '',
     label: 'Enter Date (YYYY/MM/DD)',
-    rules: [(v: string) => /^[0-9]{4}\/([0-9]{2})\/([0-9]{2})$/.test(v) || 'Invalid date format'],
+    rules: [
+      (v: string) =>
+        /^[0-9]{4}\/([0-9]{2})\/([0-9]{2})$/.test(v) || 'Invalid date format',
+    ],
   },
 };
