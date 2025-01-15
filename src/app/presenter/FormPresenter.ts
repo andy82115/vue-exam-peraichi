@@ -50,6 +50,7 @@ const createDefaultFormSendData = (): FormSendData => ({
   id: { value: undefined, isRequired: true },
 });
 
+// PiniaでForm画面の状態管理
 export const useFormPresenterStore = defineStore('formPresenter', () => {
   const sendFormState = ref<SendFormState>(SendFormStates.INIT);
   const invalidErrors = ref<string[]>([]);
@@ -65,6 +66,7 @@ export const useFormPresenterStore = defineStore('formPresenter', () => {
     sendFormState.value = SendFormStates.INIT;
   };
 
+  // validチェック
   const checkForm = async () => {
     sendFormState.value = SendFormStates.LOADING;
     const params = formSendDataToParam(formSendData.value);
@@ -76,10 +78,12 @@ export const useFormPresenterStore = defineStore('formPresenter', () => {
     }
   };
 
+  // Formの送信
   const sendForm = async () => {
     sendFormState.value = SendFormStates.LOADING;
     const params = formSendDataToParam(formSendData.value);
 
+    // 再validチェック
     if (!checkDataValid(params)) {
       sendFormState.value = sendFormStates.INVALID;
       return;
@@ -134,8 +138,10 @@ export const useFormPresenterStore = defineStore('formPresenter', () => {
       ) {
         errors.push(ErrorMessages.INVALID_DATE);
       } else {
+        // Javascriptの月は0から11
         const parsedDate = new Date(year, month - 1, day);
 
+        // Dateは正しくない場合、getTime()はNaNを返信します。
         if (isNaN(parsedDate.getTime())) {
           errors.push(ErrorMessages.INVALID_DATE);
         } else {

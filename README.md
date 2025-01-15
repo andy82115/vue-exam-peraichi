@@ -39,15 +39,15 @@ npm run storybook
 ![vue arch](./docs/vueflow.jpg)
 
 # 実装かかる時間
-1/11 (土)　
-環境設定: dotenv, eslint, vuetify, storybook, tailwindcss,...などなど
-1/12 (日)　
-API〜アーキテクチャーを実装します。
-API Service, クリーンアーキテクチャー (Data, Domain, Presenter)
-1/13 (月)
-UIを実装します。Presenterを調整します。
-1/14 (火)
-READMEを作ります。
+- 1/11 (土)　
+    - 環境設定: dotenv, eslint, vuetify, storybook, tailwindcss,...などなど
+- 1/12 (日)　
+    - API〜アーキテクチャーを実装します。
+    - API Service, クリーンアーキテクチャー (Data, Domain, Presenter)
+- 1/13 (月) 
+    - UIを実装します。Presenterを調整します。
+- 1/14 (火)
+    - READMEを作ります。
 
 # 開発について
 

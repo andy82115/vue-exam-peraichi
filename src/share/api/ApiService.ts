@@ -35,6 +35,7 @@ export class FormApiService implements FormApiServiceType {
 
     this.axiosInstance.interceptors.response.use(
       (response) => {
+        // Responseのタイプをチェックします。
         const contentType = response.headers['content-type'];
         if (contentType && contentType.includes('text/html')) {
           throw new Error('Received HTML response instead of JSON');
