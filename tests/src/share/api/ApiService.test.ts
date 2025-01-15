@@ -9,6 +9,7 @@ config({ path: ".env" });
 describe("FormApiService Integration Test", () => {
   const service = new FormApiService();
 
+  // 実際にAPIの発送をチェックします。　必要の時、skipを消しって、テストします。
   it.skip("should send a form and return a valid response from the actual API", async () => {
     try {
       const params: FormSendParam = {

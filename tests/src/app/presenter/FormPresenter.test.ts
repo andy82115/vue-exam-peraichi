@@ -15,6 +15,7 @@ describe('formPresenterStore', () => {
     setActivePinia(createPinia());
   });
 
+  // PresenterのINIT状態を確認します。
   it('should initialize with default state', () => {
     const store = useFormPresenterStore();
     expect(store.sendFormState).toBe(store.SendFormStates.INIT);
@@ -22,6 +23,7 @@ describe('formPresenterStore', () => {
     expect(store.formSendData).toBeDefined();
   });
 
+  // formのバリデーション。エラーを確認します。　[checkForm()]
   it('should validate form data and detect invalid fields', async () => {
     const store = useFormPresenterStore();
     const { ErrorMessages } = store;
@@ -45,6 +47,7 @@ describe('formPresenterStore', () => {
     expect(store.invalidErrors).toContain(ErrorMessages.EMPTY_EMAIL);
   });
 
+  // formのバリデーション。正しい入力を確認します。　[checkForm()]
   it('should validate form data and detect valid fields', async () => {
     const store = useFormPresenterStore();
 
@@ -59,6 +62,7 @@ describe('formPresenterStore', () => {
     expect(store.invalidErrors).toEqual([]);
   });
 
+  // formの送信成功テスト
   it('should send form successfully when data is valid', async () => {
     const store = useFormPresenterStore();
 
@@ -73,6 +77,7 @@ describe('formPresenterStore', () => {
     expect(store.sendFormState).toBe(store.SendFormStates.SUCCESS);
   });
 
+  // formの送信失敗テスト(バリデーションを断る場合)
   it('should fail to send form when data is invalid', async () => {
     const store = useFormPresenterStore();
 
@@ -87,6 +92,7 @@ describe('formPresenterStore', () => {
     expect(response).toBeUndefined();
   });
 
+  // 画像が増減のテスト
   it('should add and remove image paths', () => {
     const store = useFormPresenterStore();
 
