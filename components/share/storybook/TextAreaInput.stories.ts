@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/vue3';
-import TextareaInput from '../TextAreaInput.vue';
+import TextAreaInput from '../TextAreaInput.vue';
 
-const meta: Meta<typeof TextareaInput> = {
-  title: 'Components/TextareaInput',
-  component: TextareaInput,
+const meta: Meta<typeof TextAreaInput> = {
+  title: 'Components/TextAreaInput',
+  component: TextAreaInput,
   argTypes: {
     modelValue: {
       description: 'The value of the textarea (used with v-model)',
@@ -27,15 +27,28 @@ const meta: Meta<typeof TextareaInput> = {
       ],
     },
   },
+  decorators: [
+    (story) => ({
+      components: { story },
+      template: '<div class="w-fit h-fit flex"><story /></div>'
+    })
+  ],
 };
 
 export default meta;
 
-type Story = StoryObj<typeof TextareaInput>;
+type Story = StoryObj<typeof TextAreaInput>;
 
 export const Default: Story = {
   args: {
-    modelValue: 'This is a sample text.',
+    modelValue: '',
+    placeholder: 'Description',
+  },
+};
+
+export const WithInitialValue: Story = {
+  args: {
+    modelValue: 'sss',
     placeholder: 'Description',
   },
 };

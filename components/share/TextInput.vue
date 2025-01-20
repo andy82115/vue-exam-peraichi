@@ -1,6 +1,7 @@
 <template>
   <v-text-field
-    v-model="inputValue"
+    :model-value="modelValue"
+    @update:model-value="emit('update:modelValue', $event)"
     :label="label"
     :rules="rules"
     variant="outlined"
@@ -26,12 +27,4 @@
   });
 
   const emit = defineEmits(['update:modelValue']);
-  const inputValue = ref(props.modelValue);
-
-  watch(
-    () => inputValue.value,
-    (newValue) => {
-      emit('update:modelValue', newValue);
-    }
-  );
 </script>

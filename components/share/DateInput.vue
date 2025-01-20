@@ -1,10 +1,11 @@
 <template>
   <v-text-field
-    v-model="formattedDate"
+    :model-value="modelValue"
+    @update:model-value="handleInput"
+    @keypress="validateKeyPress"
     :label="label"
     :rules="rules"
     variant="outlined"
-    @input="formatDate"
     maxlength="10"
   />
 </template>
@@ -48,19 +49,37 @@
   });
 
   const emit = defineEmits(['update:modelValue']);
-  const formattedDate = ref(props.modelValue);
 
-  watch(
-    () => formattedDate.value,
-    (newValue) => {
-      emit('update:modelValue', newValue);
+  const validateKeyPress = (event: KeyboardEvent) => {
+    if (
+      !/[\d/]/.test(event.key) &&
+      event.key !== 'Backspace' &&
+      event.key !== 'Delete'
+    ) {
+      event.preventDefault();
     }
-  );
 
-  const formatDate = () => {
-    let date = formattedDate.value.replace(/\D/g, '');
-    if (date.length > 4) date = `${date.slice(0, 4)}/${date.slice(4)}`;
-    if (date.length > 7) date = `${date.slice(0, 7)}/${date.slice(7)}`;
-    formattedDate.value = date.slice(0, 10);
+    if (event.key === '/' && props.modelValue.includes('/')) {
+      const slashCount = (props.modelValue.match(/\//g) || []).length;
+      if (slashCount >= 2) {
+        event.preventDefault();
+      }
+    }
+  };
+
+  const handleInput = (value: string) => {
+    let cleanValue = value.replace(/[^\d/]/g, '');
+
+    let formattedDate = cleanValue;
+    const numbers = cleanValue.replace(/\//g, '');
+
+    if (numbers.length >= 4 && !formattedDate.includes('/')) {
+      formattedDate = `${numbers.slice(0, 4)}/${numbers.slice(4)}`;
+    }
+    if (numbers.length >= 6 && formattedDate.split('/').length < 3) {
+      formattedDate = `${formattedDate.slice(0, 7)}/${numbers.slice(6)}`;
+    }
+
+    emit('update:modelValue', formattedDate.slice(0, 10));
   };
 </script>

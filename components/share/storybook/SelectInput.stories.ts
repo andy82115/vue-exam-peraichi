@@ -23,6 +23,12 @@ const meta: Meta<typeof SelectInput> = {
       ],
     },
   },
+  decorators: [
+    (story) => ({
+      components: { story },
+      template: '<div class="w-full h-fit flex"><story /></div>'
+    })
+  ],
 };
 
 export default meta;

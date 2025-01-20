@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/vue3';
+import { ref, watch } from 'vue';
 import TextInput from '../TextInput.vue';
 
 const meta: Meta<typeof TextInput> = {
@@ -23,6 +24,12 @@ const meta: Meta<typeof TextInput> = {
       ],
     },
   },
+  decorators: [
+    (story) => ({
+      components: { story },
+      template: '<div class="w-full h-fit flex"><story /></div>'
+    })
+  ],
 };
 
 export default meta;
@@ -31,7 +38,7 @@ type Story = StoryObj<typeof TextInput>;
 
 export const Default: Story = {
   args: {
-    modelValue: 'llllllll',
+    modelValue: '',
     label: 'UserName',
   },
 };

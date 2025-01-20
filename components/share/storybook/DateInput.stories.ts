@@ -27,6 +27,12 @@ const meta: Meta<typeof DateInput> = {
       ],
     },
   },
+  decorators: [
+    (story) => ({
+      components: { story },
+      template: '<div class="w-full h-fit flex"><story /></div>'
+    })
+  ],
 };
 
 export default meta;
